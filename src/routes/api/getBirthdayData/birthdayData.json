@@ -1,0 +1,344 @@
+[
+	{
+		"id": 0,
+		"date": "12-1",
+		"employee": "Edward Mus",
+		"department": "Information Technology"
+	},
+	{
+		"id": 1,
+		"date": "12-1",
+		"employee": "Lauren Willis",
+		"department": "Human Resources"
+	},
+	{
+		"id": 2,
+		"date": "12-2",
+		"employee": "Peggy Brown",
+		"department": "Communications"
+	},
+	{
+		"id": 3,
+		"date": "12-2",
+		"employee": "Chadwick Driggers",
+		"department": "Wastewater Collections"
+	},
+	{
+		"id": 4,
+		"date": "12-2",
+		"employee": "Lourenza Thumbtzen",
+		"department": "Delinquent Tax"
+	},
+	{
+		"id": 5,
+		"date": "12-3",
+		"employee": "Marisa Dantzler",
+		"department": "Emergency Medical Services"
+	},
+	{
+		"id": 6,
+		"date": "12-3",
+		"employee": "Wallace White",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 7,
+		"date": "12-4",
+		"employee": "Matthew (Ryan) Gatlin",
+		"department": "BCWS Engineering"
+	},
+	{
+		"id": 8,
+		"date": "12-4",
+		"employee": "Karen Shank",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 9,
+		"date": "12-5",
+		"employee": "Timothy Ham",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 10,
+		"date": "12-5",
+		"employee": "Andrea Howell",
+		"department": "Solicitors Office"
+	},
+	{
+		"id": 11,
+		"date": "12-5",
+		"employee": "Kayla White",
+		"department": "STORMWATER/R&B"
+	},
+	{
+		"id": 12,
+		"date": "12-6",
+		"employee": "Greg Davis",
+		"department": "Information Technology"
+	},
+	{
+		"id": 13,
+		"date": "12-6",
+		"employee": "Misty Shuler",
+		"department": "GIS/Address Information"
+	},
+	{
+		"id": 14,
+		"date": "12-6",
+		"employee": "Shonda Williams",
+		"department": "County Supervisors Office"
+	},
+	{
+		"id": 15,
+		"date": "12-8",
+		"employee": "Melissa Norvell",
+		"department": "Sheriff's Office Detention Ctr"
+	},
+	{
+		"id": 16,
+		"date": "12-9",
+		"employee": "Cathy Scott",
+		"department": "Clerk Of Courts Office"
+	},
+	{
+		"id": 17,
+		"date": "12-10",
+		"employee": "Meredith Davey",
+		"department": "Library St Stephen"
+	},
+	{
+		"id": 18,
+		"date": "12-10",
+		"employee": "Heather Gaskins",
+		"department": "Magistrate Court"
+	},
+	{
+		"id": 19,
+		"date": "12-10",
+		"employee": "Randall Matthews",
+		"department": "Real Property Services"
+	},
+	{
+		"id": 20,
+		"date": "12-11",
+		"employee": "Dennis Chapman",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 21,
+		"date": "12-11",
+		"employee": "Karen Guerry",
+		"department": "Mosquito Abatement"
+	},
+	{
+		"id": 22,
+		"date": "12-11",
+		"employee": "Linda Ohm",
+		"department": "Facilities & Grounds"
+	},
+	{
+		"id": 23,
+		"date": "12-12",
+		"employee": "Diana Jones",
+		"department": "Library Admin"
+	},
+	{
+		"id": 24,
+		"date": "12-12",
+		"employee": "Julie Weatherford",
+		"department": "Magistrate Court"
+	},
+	{
+		"id": 25,
+		"date": "12-13",
+		"employee": "Thomas Rostin",
+		"department": "Solicitors Office"
+	},
+	{
+		"id": 26,
+		"date": "12-14",
+		"employee": "Robert Dwyer",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 27,
+		"date": "12-14",
+		"employee": "Judith Penton",
+		"department": "Emergency Medical Services"
+	},
+	{
+		"id": 28,
+		"date": "12-15",
+		"employee": "Candice Grady",
+		"department": "Water Distribution"
+	},
+	{
+		"id": 29,
+		"date": "12-16",
+		"employee": "Ronald Peagler",
+		"department": "Maintenance Garage"
+	},
+	{
+		"id": 30,
+		"date": "12-17",
+		"employee": "Angela Pinson",
+		"department": "County Supervisors Office"
+	},
+	{
+		"id": 31,
+		"date": "12-17",
+		"employee": "Kristin Riddle",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 32,
+		"date": "12-18",
+		"employee": "Carla Carswell",
+		"department": "Information Technology"
+	},
+	{
+		"id": 33,
+		"date": "12-18",
+		"employee": "John Prioleau",
+		"department": "Roads & Bridges"
+	},
+	{
+		"id": 34,
+		"date": "12-19",
+		"employee": "Shelley Forest",
+		"department": "County Council"
+	},
+	{
+		"id": 35,
+		"date": "12-19",
+		"employee": "Obie Pittman",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 36,
+		"date": "12-20",
+		"employee": "Robin Sutton",
+		"department": "Real Property Services"
+	},
+	{
+		"id": 37,
+		"date": "12-20",
+		"employee": "Brian West",
+		"department": "Magistrate Court"
+	},
+	{
+		"id": 38,
+		"date": "12-21",
+		"employee": "Alexus Dobbs",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 39,
+		"date": "12-21",
+		"employee": "Steven Zubkoff",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 40,
+		"date": "12-23",
+		"employee": "Myra Dix",
+		"department": "Economic Development"
+	},
+	{
+		"id": 41,
+		"date": "12-23",
+		"employee": "Monea Middleton",
+		"department": "SRO ELEM GRANTS"
+	},
+	{
+		"id": 42,
+		"date": "12-23",
+		"employee": "George Peterson",
+		"department": "Solid Waste Collections"
+	},
+	{
+		"id": 43,
+		"date": "12-23",
+		"employee": "Carolyn Umphlett",
+		"department": "Treasurers Office"
+	},
+	{
+		"id": 44,
+		"date": "12-24",
+		"employee": "Richard Kollman",
+		"department": "Treatment Plant"
+	},
+	{
+		"id": 45,
+		"date": "12-24",
+		"employee": "Beth Sellers",
+		"department": "Sheriff's Office"
+	},
+	{
+		"id": 46,
+		"date": "12-26",
+		"employee": "Carlos Cooper",
+		"department": "Facilities & Grounds"
+	},
+	{
+		"id": 47,
+		"date": "12-26",
+		"employee": "DeAnne Rupert",
+		"department": "Library Sangaree"
+	},
+	{
+		"id": 48,
+		"date": "12-26",
+		"employee": "Zsa Zsa Tucker",
+		"department": "Sheriff's Office Detention Ctr"
+	},
+	{
+		"id": 49,
+		"date": "12-29",
+		"employee": "Bradly Clark",
+		"department": "Wastewater Collections"
+	},
+	{
+		"id": 50,
+		"date": "12-29",
+		"employee": "Katheryn Whetstone",
+		"department": "SRO ELEM GRANTS"
+	},
+	{
+		"id": 51,
+		"date": "12-30",
+		"employee": "Brian Holden",
+		"department": "Information Technology"
+	},
+	{
+		"id": 52,
+		"date": "12-30",
+		"employee": "Tommy Newell",
+		"department": "County Council"
+	},
+	{
+		"id": 53,
+		"date": "12-30",
+		"employee": "Tiffany Washington",
+		"department": "Communications"
+	},
+	{
+		"id": 54,
+		"date": "12-31",
+		"employee": "Aliya George",
+		"department": "Library Admin"
+	},
+	{
+		"id": 55,
+		"date": "12-31",
+		"employee": "Jeffrey Hardiman",
+		"department": "Pump & Plant Mechanical Maintenance"
+	},
+	{
+		"id": 56,
+		"date": "12-31",
+		"employee": "Norma Mixson-Davey",
+		"department": "Solicitors Office/Victim Wit"
+	}
+]
