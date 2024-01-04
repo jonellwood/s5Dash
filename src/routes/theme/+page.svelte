@@ -713,6 +713,17 @@
 				data-name={'shadowColor'}
 				data-index={'5'}
 			/>
+			<label for="shadowSize">Shadow Size: {theme[9]}</label>
+			<input
+				bind:value={theme[9]}
+				type="range"
+				min="0"
+				max="30"
+				oninput={handleColorChange}
+				id="shadowSize"
+				data-name={'shadowSize'}
+				data-index={'9'}
+			/>
 
 			<label for="bodyBgColor">Body Background Color: {theme[6]} </label>
 			<input
@@ -746,17 +757,6 @@
 				data-index={'8'}
 			/>
 
-			<label for="shadowSize">Shadow Size: {theme[9]}</label>
-			<input
-				bind:value={theme[9]}
-				type="range"
-				min="0"
-				max="30"
-				oninput={handleColorChange}
-				id="shadowSize"
-				data-name={'shadowSize'}
-				data-index={'9'}
-			/>
 		</div>
 	</div>
 </div>
@@ -785,7 +785,7 @@
 			sans-serif;
 	}
 	.card {
-		width: 500px;
+		width: 300px;
 		height: 300px;
 		padding: 20px;
 		margin: 20px;
