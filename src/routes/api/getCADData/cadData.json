@@ -1,0 +1,26 @@
+[
+	{
+		"callType": "LAW",
+		"date": "12/21/2023 07:37",
+		"incidentType": "PRISONER TRANSPORT",
+		"address": "300 CALIFORNIA AV, MONCKS CORNER",
+		"lat": "33.200421627144",
+		"long": "-80.017042658666"
+	},
+	{
+		"callType": "FIRE",
+		"date": "12/21/2023 08:46",
+		"incidentType": "104 ALARMS - FIRE",
+		"address": "7000 BOWEN PIER DR STE 1, HANAHAN",
+		"lat": "32.9281459",
+		"long": "-80.0126509"
+	},
+	{
+		"callType": "EMS",
+		"date": "12/21/2023 08:56",
+		"incidentType": "6 BREATHING PROBLEMS",
+		"address": "2158 RIDGE CHURCH RD, SUMMERVILLE",
+		"lat": "33.042337774832",
+		"long": "-80.112017698746"
+	}
+]

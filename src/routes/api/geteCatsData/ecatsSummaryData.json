@@ -1,0 +1,52 @@
+[
+    {
+    "911": {
+        "Answered": 351,
+        "Abandoned": 14,
+        "AbandonedPercentage": "3.84%",
+        "Unparsed": 0,
+        "Total": 365,
+        "TextSessions": 10,
+        "TOTAL": 911,
+        "AveragePerDay": 375,
+        "Answer": {
+            "Answered≤10": "92.33%",
+            "Answered≤15": "96.71%",
+            "Answered≤20": "98.08%",
+            "Answered≤40": "99.73%",
+            "AverageAnswerSecs": 3.72
+                },
+        "CoS":  {
+            "WRLS": 325,
+            "WRLN": 28,
+            "VoIP": 11,
+            "TLMA&Other": 0,
+            "NoClassOfService": 1
+                }
+        },
+    "Non911": {
+        "10Digit": 96,
+        "Admin": 340,
+        "Total": 436,
+        "AveragePerDay": 436,
+        "Outbound": 267,
+        "AverageOutboundPerDay": 267
+    },
+    "Text": {
+        "InboundSessions": 10,
+        "AverageInboundPerDay": 10,
+        "AvgMsgsPerSession": 1.60,
+        "AvgSessionDurationSecs": 98.6,
+        "OutboundSessions": 0,
+        "AverageOutboundPerDay": 0
+    },
+    "TTY": {
+        "InboundCalls": 0,
+        "AverageInboundPerDay": 0,
+        "AvgMsgsPerCall": 0.00,
+        "AvgCallDurationSecs": 0.0,
+        "OutboundCalls": 0,
+        "AverageOutboundPerDay": 0
+    }
+    }
+]
