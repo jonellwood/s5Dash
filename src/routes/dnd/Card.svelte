@@ -84,11 +84,20 @@
 		// console.log('loading ', component);
 		return import(`../../lib/components/cardComponents/${component}.svelte`);
 	}
+    function closeCard(e: MouseEvent) {
+    let thisButton = e.currentTarget as HTMLElement;
+    if (thisButton && thisButton.parentElement && thisButton.parentElement.parentElement && thisButton.parentElement.parentElement.parentElement){
+        let thisParent = thisButton.parentElement.parentElement.parentElement.parentElement;
+        if (thisParent){
+            thisParent.removeAttribute('open');
+        }
+    }
+}
 </script>
 
-<div {...props} class="absolute" bind:this={card.el} onpointerdown={card.onPointerDown}>
+<div {...props} class="absolute" bind:this={card.el} onpointerdown={card.onPointerDown} style="z-index: 1;">
     <div class="p-4 w-[350px] h-[350px]" style={cardStyle as string}>
-            <h1 style="font-size: {Number(theme[9]) * 1.25 ?? 0}px; border-bottom: {theme[3]}px solid {theme[4]}; color: {theme[8]};" >{card.item.blockName} </h1>
+            <h1 style="font-size: {Number(theme[9]) * 1.25 ?? 0}px; border-bottom: {theme[3]}px solid {theme[4]}; color: {theme[8]};" >{card.item.blockName} <button onclick={closeCard}>&#127335;</button> </h1>
         
             {#await loadComponent(card.item.component) then { default: DynamicComponent }}
                 {#if DynamicComponent}
@@ -97,6 +106,14 @@
             {/await}
             <slot />
         </div>
+        <button>Promote</button>
 </div>  
-
+<style>
+    button {
+        float: right;
+        border: none;
+        background-color: transparent;
+        color: red;
+    }
+</style>
 

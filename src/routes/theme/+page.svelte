@@ -636,20 +636,20 @@
 			</div>
 		</div>
 		<div class="button-holder">
-			<button onclick={() => setToDefault()} style={cardStyle}>Set Default </button>
-			<button onclick={() => setToBerk()} style={cardStyle}>Berkeley Theme </button>
-			<button onclick={() => setToGoogle()} style={cardStyle}>Google Theme </button>
-			<button onclick={() => setToFall()} style={cardStyle}>Fall Theme </button>
-			<button onclick={() => setToNature()} style={cardStyle}>Nature Theme </button>
-			<button onclick={() => setToVibrant()} style={cardStyle}>Vibrant Theme </button>
-			<button onclick={() => setToBasic()} style={cardStyle}>Basic Theme </button>
-			<button onclick={() => setToHighContrast()} style={cardStyle}>High Contrast Light</button>
-			<button onclick={() => setToHighContrastDark()} style={cardStyle}>High Contrast Dark</button>
-			<button onclick={() => setToGryffindor()} style={cardStyle}>Gryffindor Theme </button>
-			<button onclick={() => setToSlytherin()} style={cardStyle}>Slytherin Theme </button>
-			<button onclick={() => setToRavenclaw()} style={cardStyle}>Ravenclaw Theme </button>
-			<button onclick={() => setToHufflepuff()} style={cardStyle}>Hufflepuff Theme </button>
-			<button onclick={() => setToRandom()} style={cardStyle}>Random Theme </button>
+			<button onclick={() => setToDefault()} style={cardStyle as string}> Default Theme </button>
+			<button onclick={() => setToBerk()} style={cardStyle as string}>Berkeley Theme </button>
+			<button onclick={() => setToGoogle()} style={cardStyle as string}>Google Theme </button>
+			<button onclick={() => setToFall()} style={cardStyle as string}>Fall Theme </button>
+			<button onclick={() => setToNature()} style={cardStyle as string}>Nature Theme </button>
+			<button onclick={() => setToVibrant()} style={cardStyle as string}>Vibrant Theme </button>
+			<button onclick={() => setToBasic()} style={cardStyle as string}>Basic Theme </button>
+			<button onclick={() => setToHighContrast()} style={cardStyle as string}>High Contrast Light</button>
+			<button onclick={() => setToHighContrastDark()} style={cardStyle as string}>High Contrast Dark</button>
+			<button onclick={() => setToGryffindor()} style={cardStyle as string}>Gryffindor Theme </button>
+			<button onclick={() => setToSlytherin()} style={cardStyle as string}>Slytherin Theme </button>
+			<button onclick={() => setToRavenclaw()} style={cardStyle as string}>Ravenclaw Theme </button>
+			<button onclick={() => setToHufflepuff()} style={cardStyle as string}>Hufflepuff Theme </button>
+			<button onclick={() => setToRandom()} style={cardStyle as string}>Random Theme </button>
 		</div>
 	</div>
 	<div class="right" id="right" style="color: {theme[8]}">

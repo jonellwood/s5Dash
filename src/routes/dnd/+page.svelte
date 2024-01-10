@@ -3,7 +3,7 @@
     import {Frame} from './state.svelte';
     import Card from './Card.svelte';
     let { } = $props<HTMLAttributes<HTMLDivElement>>();
-
+    
     const frame = new Frame()
     
 
@@ -151,7 +151,7 @@ let counter = $state(0);
 
 
 <div>
-    <div class="grid grid-cols-4 w-[75%] h-dvh gap-4 p-4 m-4" style={bodyStyle as string} bind:this={frame.frameEl} onpointerup={frame.onPointerUp} onpointermove={frame.onPointerMove}>
+    <div class="grid grid-cols-5 w-[95%] h-dvh gap-4 p-4 m-4" style={bodyStyle as string} bind:this={frame.frameEl} onpointerup={frame.onPointerUp} onpointermove={frame.onPointerMove}>
         {#each dashItems as item}
             <details>
                     <summary>{item.blockName}</summary>
@@ -159,6 +159,7 @@ let counter = $state(0);
             </details>
         {/each}
         </div>
+        <hr>
 </div>
   
 
@@ -205,5 +206,24 @@ let counter = $state(0);
     .grid{
         height: 100dvh;
         height: fit-content;
+    }
+    details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 0.5em 0.5em 0;
+    }
+
+    summary {
+    font-weight: bold;
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+    }
+
+    /* details[open] {
+    padding: 0.5em;
+    } */
+
+    details[open] summary {
+    background-color: #80808050;
     }
 </style>

@@ -48,7 +48,7 @@
         background-color: ${theme[6]};`
     })
 </script>
-<div class="app" style={bodyStyle}>
+<div class="app" style={bodyStyle as string}>
 <!-- <Navbar /> -->
 <SiteHeader />
 <slot />

@@ -25,8 +25,9 @@
 				</div>
 			</a>
 		</div>
-		<div class="flex flex-1 items-center justify-end space-x-2 sm:space-x-4 pr-4">
+		<div class="flex flex-1 items-center justify-center space-x-2 sm:space-x-4 pr-4">
 			<nav class="flex items-center">
+				<a href="/jibjab">JibJab</a>
 				<a href="/dnd">D&D</a>
 				<a href="/generator">Generator</a>
 				<a href="/gui">GUI</a>
