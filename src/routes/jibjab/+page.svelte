@@ -13,7 +13,33 @@ import DashItem from '../+page.svelte'
 import HorizBarChart from '$lib/components/customCardElements/HorizBarChart.svelte';
 import VertBarChart from '$lib/components/customCardElements/VertBarChart.svelte';
 import PieChart from '../../lib/components/customCardElements/PieChart.svelte';
-// import type { Mouse } from 'phosphor-svelte';
+
+let selectedComponent = $state('');
+
+const handleChartClick = (chartType: string) => {
+    console.log(chartType);
+    switch(chartType) {
+        case 'HorizBarChart':
+            selectedComponent = 'HorizBarChart';
+            break;
+        case 'VertBarChart':
+            selectedComponent = 'VertBarChart';
+            break;
+        case 'PieChart':
+            selectedComponent = 'PieChart';
+            break;
+        case 'DataTable':
+            selectedComponent = 'dataTable';
+            break;
+        default:
+            selectedComponent = 'HorizBarChart';
+    }
+}
+function loadComponent(component: string) {
+		// console.log('loading ', component);
+		return import(`../lib/components/cardComponents/${component}.svelte`);
+	}
+
 let theme = $state<Theme[]>([]);
 let dashItems = $state<DashItem[]>([]);
 let blockName = $state('');
@@ -68,24 +94,29 @@ let description = $state('')
         
         <ul>
             <li>
-                <p>
+                <p id="horizBarChart">
                     <img src={BarChartImage} alt="bar chart" class="rotate-icon"/>
-                   Horizontal Bar Chart
+                    <button onclick={() => handleChartClick('HorizBarChart')}  onkeydown={() => handleChartClick('HorizBarChart')}>
+                        Horizontal Bar Chart
+                    </button>
                 </p>
             </li>
             <li class="separator"></li>
-            <li>
-                <p>
+            <li >
+                <p id="verticalBarChart">
                     <img src={BarChartImage} alt="bar chart" />
-                   Vertical Bar Chart
+                    <button onclick={() => handleChartClick('VertBarChart')} onkeydown={() => handleChartClick('VertBarChart')} >
+                        Vertical Bar Chart
+                    </button>
                 </p>
             </li>
             <li class="separator"></li>
             <li>
-                <p>
+                <p id="pieChart">
                     <img src={PieChartImage} alt="pie chart" />
-                
-                    Pie Chart
+                    <button onclick={() => handleChartClick('PieChart')} onkeydown={() => handleChartClick('PieChart')}>
+                        Pie Chart
+                    </button>
                 </p>
             </li>
             <li class="separator"></li>
@@ -97,7 +128,7 @@ let description = $state('')
             </li>
             <li class="separator"></li> -->
             <li>
-                <p>
+                <p id="dataTable">
                     <img src={DataTableImage} alt="data table" />
                     Data Table
                 </p>
@@ -106,7 +137,7 @@ let description = $state('')
         </ul>
         
     </div>
-    <div class="center-pane">
+    <div class="center-pane" >
         <div class="p-4 w-[300px] h-[300px]" style={cardStyle as string}>
             {#if blockName === ""}
             <h1 style="font-size: {Number(theme[9]) * 1.25 ?? 0}px; border-bottom: {theme[3]}px solid {theme[4]}; color: {theme[8]};">Component Name</h1>
@@ -132,12 +163,27 @@ let description = $state('')
 			{/if}
 		</p> -->
         <p>
-            Drag a component type from the left pane to this area to display your data.
+           Click component name type from the left pane to this area to display your data.
         </p>
-        <p>
+        <p id="center-pane-data-area">
+            
+            {#if selectedComponent === 'HorizBarChart'}
+                <HorizBarChart />
+            {:else if selectedComponent === 'VertBarChart'}
+                <VertBarChart />
+            {:else if selectedComponent === 'PieChart'}
+                <PieChart />
+            <!-- {:else if selectedComponent === 'dataTable'}
+                <DataTable /> -->
+            
+            
+
+                <!-- <svelte:component this = {selectedComponent} /> -->
+            {/if}
+            
             <!-- <HorizBarChart /> -->
             <!-- <VertBarChart /> -->
-            <PieChart />
+            <!-- <PieChart /> -->
         </p>
         </div>
 
