@@ -1,0 +1,32 @@
+[
+	{
+		"name": "Employee Data",
+		"uuid": "e10dbdcc-97e5-4620-8e28-e81605d1fe4d",
+		"createdBy": "system",
+		"dataSource": "3CX Extensions",
+		"dataSourceUrl": "../api/getEmployeeData",
+		"displayType": "DataTable",
+		"backgroundColor": "#5981123",
+		"textColor": "#ffffff"
+	},
+	{
+		"name": "My Chart",
+		"uuid": "a74dc0ac-d773-4d9a-b9a4-05b1900e8a95",
+		"createdBy": "system",
+		"dataSource": "Fleet Tickets",
+		"dataSourceUrl": "../../routes/api/getFleetTicketData/TicketData.json",
+		"displayType": "VertBarChart",
+		"backgroundColor": "#7fa4cb",
+		"textColor": "#ffffff"
+	},
+	{
+		"name": "My Pie Chart",
+		"uuid": "bea88b3e-be68-4e15-92ce-e34d1cbc203e",
+		"createdBy": "system",
+		"dataSource": "3CX Extensions",
+		"dataSourceUrl": "../../routes/api/get3CXExtensionData/extensionData.json",
+		"displayType": "PieChart",
+		"backgroundColor": "#f5cd05",
+		"textColor": "#050505"
+	}
+]

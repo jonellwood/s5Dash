@@ -19,14 +19,13 @@
 					<img src={BcLogo} alt="bc logo" class="h-10 w-full object-contain" />
 				</div>
 				<div>
-					<span class="text-[15px] font-semibold sm:inline-block lg:text-base">
-						Dashboard
-					</span>
+					<span class="text-[15px] font-semibold sm:inline-block lg:text-base"> Dashboard </span>
 				</div>
 			</a>
 		</div>
-		<div class="flex flex-1 items-center justify-center space-x-2 sm:space-x-4 pr-4">
+		<div class="flex flex-1 items-center justify-center space-x-2 pr-4 sm:space-x-4">
 			<nav class="flex items-center">
+				<a href="/libDev">libDev</a>
 				<a href="/jibjab">JibJab</a>
 				<a href="/dnd">D&D</a>
 				<a href="/generator">Generator</a>
@@ -50,6 +49,7 @@
 		</div>
 	</div>
 </header>
+
 <style>
 	a {
 		padding-right: 10%;

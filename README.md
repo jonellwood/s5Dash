@@ -30,3 +30,18 @@
 The basic concept is that the json data for the user is returned and looped over. Foreach a component is created from the data in the json and then wrapped in a DashCard component (_name for now... not looking to refactor right now_). The components are not components in the traditional sense of being located in ` src/components/component.svelte` but are created on load. This might be the downfall of the entire project since Svelte compiles.
 
 First goal will be to create these components from a sample .json file with no data sources. Once that `magic` happens - we will move on to figuring out dynamic data sources. I am thinking maybe this needs to be a SSR solution, but I am guessing as I am not knowledge enough about when to use SSR or CSR. Only one way to learn... lets go 🚀
+
+_(1/12/2024 1010 hours)_ : I guess I was already do that before...
+
+_*NEXT STEP*_
+
+- figure out how to pass the data source props from the dataSources.json file into each "sub-component" of the CC.
+  - For that let's go back the jibjab page where we are creating these components, grab that value when we import the dataSources file, and assign the url value as part of the element that is written to the json file.
+  - This will presents an issue to address down the road when using actual API sources that require auth...
+
+_(1/23/2024 1144 hours)_ : created an API endpoint that queries a mysql and returns data, and even populates it in the data table. 🆒
+
+The data table `<th>` values had to be hard coded to make sense.... these values should be part of the component object I think. Back to the jibjab.
+
+- This would also allow limiting the data field could. Its a dashboard card...so probably three?
+- I think the values available for the user to pick from could come from the dataSources.json file 💡💡💡💡
