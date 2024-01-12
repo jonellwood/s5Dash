@@ -3,7 +3,7 @@ import { mysqlconnFn } from "$lib/db/mysql";
 export async function POST() {
 	let mysqlconn = await mysqlconnFn();
 
-	const query = `SELECT * FROM emp_ref WHERE seperation_date IS NULL`;
+	const query = `SELECT * FROM emp_ref WHERE seperation_date IS NULL LIMIT 10`;
 
 	let results = {};
 

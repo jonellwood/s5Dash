@@ -7,6 +7,38 @@
 		// console.log('loading ', component);
 		return import(`../lib/components/customCardComponents/${component}.svelte`);
 	}
+	import Theme from "../+page.svelte";
+	let theme = $state<Theme[]>([]);
+	let cardStyle = $state();
+	let bodyStyle = $state();
+	$effect(() => {
+		const savedTheme = localStorage.getItem("theme");
+		savedTheme && (theme = JSON.parse(savedTheme));
+		// console.log(savedTheme);
+		const savedDashItems = localStorage.getItem("dashItems");
+		savedDashItems && (dashItems = JSON.parse(savedDashItems));
+		// console.log('Saved Dash Items:')
+		// console.log(savedDashItems)
+	});
+
+	$effect(() => {
+		cardStyle = `
+	        background-color: ${theme[1]};
+            color: ${theme[2]};
+            border: ${theme[3]}px solid ${theme[4]};
+            box-shadow: ${theme[9]}px ${theme[9]}px ${theme[9]}px 1px ${theme[5]};
+            font-size: ${theme[7]}px;
+            h2 {
+                color: ${theme[8]};
+            }
+	    `;
+		// console.log(cardStyle);
+	});
+
+	$effect(() => {
+		bodyStyle = `
+        background-color: ${theme[6]};`;
+	});
 </script>
 
 {#each data as component}

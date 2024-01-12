@@ -4,10 +4,10 @@
 	import DataTableImage from "../../lib/images/dataTableIcon.svg";
 	import DataSourceIcon from "../../lib/images/dataSourceIcon.svg";
 	import DashItem from "../+page.svelte";
-	import HorizBarChart from "$lib/components/customCardElements/HorizBarChart.svelte";
-	import VertBarChart from "$lib/components/customCardElements/VertBarChart.svelte";
-	import PieChart from "../../lib/components/customCardElements/PieChart.svelte";
-	import DataTable from "$lib/components/customCardElements/DataTable.svelte";
+	import HorizBarChart from "$lib/components/sampleCardElements/HorizBarChart.svelte";
+	import VertBarChart from "$lib/components/sampleCardElements/VertBarChart.svelte";
+	import PieChart from "../../lib/components/sampleCardElements/PieChart.svelte";
+	import DataTable from "$lib/components/sampleCardElements/DataTable.svelte";
 	import Theme from "../+page.svelte";
 	import DataSources from "../../lib/data/datasources.json";
 	console.log(DataSources);
@@ -31,6 +31,10 @@
 	let selectedComponent = $state("");
 	let elemWidth = $state(0);
 	let elemHeight = $state(0);
+	let selectedEntry = $derived(DataSources.find((entry) => entry.name === dataSource));
+	let fields = $derived(selectedEntry ? Object.entries(selectedEntry.fields) : []);
+	let selectedFields = $state([]);
+	// let isFieldSelected = $state(false);
 	// import {Items} from '../../lib/data/widgetList.js';
 	// import {Websites} from '../../lib/data/websitesList.js'
 
@@ -68,13 +72,19 @@
 		return uuid;
 	}
 
-	// $effect(() => {
-	//     const elem = document.getElementById('card-div');
-	//     if (elem) {
-	//         elemWidth = elem.offsetWidth;
-	//         elemHeight = elem.offsetHeight;
-	//     }
-	// })
+	function handleFieldClick(e: Event) {
+		e.preventDefault();
+		const clickedField = e.currentTarget.value as string;
+		if (clickedField) {
+			const index = selectedFields.indexOf(clickedField);
+
+			if (index === -1) {
+				selectedFields = [...selectedFields, clickedField];
+			} else {
+				selectedFields = selectedFields.filter((field) => field !== clickedField);
+			}
+		}
+	}
 
 	function updateSize() {
 		const elem = document.getElementById("card-div");
@@ -182,6 +192,7 @@
 						on:click={() => {
 							dataSource = source.name;
 							dataSourceUrl = source.url;
+							selectedFields = [];
 						}}
 					>
 						{source.name}
@@ -214,11 +225,11 @@
 				</h2>
 			{/if}
 			<p>Click component type from the left pane to this area to display your data.</p>
-			{#if dataSource == ""}
+			<!-- {#if dataSource == ""}
 				<p>Select a Data Source from list below</p>
 			{:else}
 				<p>Data Source: {dataSource}</p>
-			{/if}
+			{/if} -->
 			<p id="center-pane-data-area">
 				{#if selectedComponent === "HorizBarChart"}
 					<HorizBarChart />
@@ -230,6 +241,27 @@
 					<DataTable />
 				{/if}
 			</p>
+
+			<div class="data-options">
+				{#if dataSource == ""}
+					<p>Select a Data Source from list below</p>
+				{:else}
+					<p>Data Source: {dataSource}</p>
+					{#if selectedEntry}
+						<p>Available Data Fields:</p>
+						<ul>
+							<li class="separator-light-border"></li>
+							{#each fields as [fieldName, fieldLabel]}
+								<li>
+									<button onclick={handleFieldClick} onkeydown={handleFieldClick} value={fieldName}>
+										{fieldLabel}
+									</button>
+								</li>
+							{/each}
+						</ul>
+					{/if}
+				{/if}
+			</div>
 		</div>
 	</div>
 	<div class="right-pane">
@@ -266,6 +298,7 @@
 				<li>Height: {elemHeight}</li>
 				<li>Width: {elemWidth}</li>
 				<li>Data Source URL: {dataSourceUrl}</li>
+				<li>Selected Fields: {selectedFields}</li>
 			</ul>
 		</div>
 	</div>
@@ -293,7 +326,7 @@
 		justify-content: center;
 		align-items: center;
 		border-right: 2px double lightgray;
-		/* overflow-y: scroll; */
+		overflow-y: scroll;
 	}
 	.left-pane img {
 		margin-left: auto;
@@ -345,5 +378,9 @@
 		bottom: 10px;
 		font-family: monospace;
 		text-align: left;
+	}
+	.data-options {
+		margin-top: 5%;
+		font-family: monospace;
 	}
 </style>

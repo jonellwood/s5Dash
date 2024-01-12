@@ -1,23 +1,43 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"name": "3CX Calls",
 		"description": "3cx Call Data",
-		"url": "../../routes/api/getCallData/callData.json",
-		"icon": "src/lib/images/phoneIcon.svg"
+		"url": "../api/getEmployeeData",
+		"fields": {
+			"callDate": "Call Date",
+			"callTime": "Call Time"
+		}
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"name": "3CX Extensions",
 		"description": "3cx Extension Data",
-		"url": "../../routes/api/get3CXExtensionData/extensionData.json",
-		"icon": "src/lib/images/phoneIcon.svg"
+		"url": "../api/getEmployeeData",
+		"fields": {
+			"EmployeeName": "Employee Name",
+			"Extension": "Extension"
+		}
 	},
 	{
-		"id": "3",
+		"id": 3,
 		"name": "Fleet Tickets",
 		"description": "Fleet Tickets Data",
-		"url": "../../routes/api/getFleetTicketData/TicketData.json",
-		"icon": "src/lib/images/carIcon.svg"
+		"url": "../api/getEmployeeData",
+		"fields": {
+			"dateCreated": "Date Created"
+		}
+	},
+	{
+		"id": 4,
+		"name": "Employee Information",
+		"description": "Employee Information Data",
+		"url": "../api/getEmployeeData",
+		"fields": {
+			"empNumber": "Employee ID",
+			"empName": "Employee Name",
+			"email": "Email",
+			"department": "Department"
+		}
 	}
 ]
