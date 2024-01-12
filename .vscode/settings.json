@@ -1,4 +1,17 @@
 {
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"workbench.colorCustomizations": {
+		"titleBar.activeForeground": "#ff0999",
+		"titleBar.inactiveForeground": "#000000cc",
+		"titleBar.activeBackground": "#f09d09",
+		"titleBar.inactiveBackground": "#234b74",
+		"editor.selectionBackground": "#ff0000",
+		"editor.selectionHighlightBackground": "#000000",
+		"editor.wordHighlightBackground": "#ff00ff",
+		"editor.wordHighlightStrongBackground": "#ff0000"
+	},
 	"cSpell.words": [
 		"Alexus",
 		"Aliya",
