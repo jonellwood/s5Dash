@@ -5,6 +5,12 @@
 		"createdBy": "system",
 		"dataSource": "3CX Extensions",
 		"dataSourceUrl": "../api/getEmployeeData",
+		"fields": {
+			"empNumber": "Employee ID",
+			"empName": "Employee Name",
+			"email": "Email",
+			"department": "Department"
+		},
 		"displayType": "DataTable",
 		"backgroundColor": "#5981123",
 		"textColor": "#ffffff"
@@ -14,7 +20,10 @@
 		"uuid": "a74dc0ac-d773-4d9a-b9a4-05b1900e8a95",
 		"createdBy": "system",
 		"dataSource": "Fleet Tickets",
-		"dataSourceUrl": "../../routes/api/getFleetTicketData/TicketData.json",
+		"dataSourceUrl": "../api/getFleetTicketData",
+		"fields": {
+			"dateCreated": "Date Created"
+		},
 		"displayType": "VertBarChart",
 		"backgroundColor": "#7fa4cb",
 		"textColor": "#ffffff"
@@ -24,7 +33,11 @@
 		"uuid": "bea88b3e-be68-4e15-92ce-e34d1cbc203e",
 		"createdBy": "system",
 		"dataSource": "3CX Extensions",
-		"dataSourceUrl": "../../routes/api/get3CXExtensionData/extensionData.json",
+		"dataSourceUrl": "../api/get3CXExtensionData",
+		"fields": {
+			"EmployeeName": "Employee Name",
+			"Extension": "Extension"
+		},
 		"displayType": "PieChart",
 		"backgroundColor": "#f5cd05",
 		"textColor": "#050505"

@@ -25,7 +25,7 @@
 				console.log("holy shit I did it");
 				console.log(data);
 			} else {
-				console.log(`HTTP Error: STATUS: ${response.status}`);
+				console.error(`HTTPS Error: STATUS: ${response.status}`);
 			}
 		} catch (error) {
 			console.log("Fetch Error: ", error);
