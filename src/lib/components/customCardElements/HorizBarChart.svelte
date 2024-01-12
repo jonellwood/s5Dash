@@ -7,6 +7,12 @@
 	{/each}
 </div>
 <style>
+	.chart {
+		/* display: flex; */
+		/* border: 10px solid hotpink; */
+		padding-top: 5%;
+		padding-left: 20%;
+	}
 	.chart div {
 		font: 10px sans-serif;
 		background-color: steelblue;

@@ -1,20 +1,38 @@
 <script lang="ts">
 import BarChartImage from '../../lib/images/barCHartIcon.svg';
 import PieChartImage from '../../lib/images/pieChartIcon.svg';
-// import LineChartImage from '../../lib/images/rain.svg';
 import DataTableImage from '../../lib/images/dataTableIcon.svg';
-
-let cardStyle = $state();
-let bodyStyle = $state();
-import Theme from "../+page.svelte";
-import {Items} from '../../lib/data/widgetList.js';
-import {Websites} from '../../lib/data/websitesList.js'
+import DataSourceIcon from '../../lib/images/dataSourceIcon.svg';
 import DashItem from '../+page.svelte'
 import HorizBarChart from '$lib/components/customCardElements/HorizBarChart.svelte';
 import VertBarChart from '$lib/components/customCardElements/VertBarChart.svelte';
 import PieChart from '../../lib/components/customCardElements/PieChart.svelte';
+import DataTable from '$lib/components/customCardElements/DataTable.svelte';
+import Theme from "../+page.svelte";
+import DataSources from '../../lib/data/datasources.json'
 
+
+let cardStyle = $state();
+let bodyStyle = $state();
+let theme = $state<Theme[]>([]);
+let dashItems = $state<DashItem[]>([]);
+let blockName = $state('');
+// let uniqueName = $state(updateUniqueName());
+let uniqueName = $state(createUUID());
+let dataSource = $state('');
+let dataOptions = $state('');
+let fuelType = $state('');
+let name = $state('');
+let component = $state('');
+let createdBy = $state('system');
+let description = $state('')
+let propValue = $state('');
 let selectedComponent = $state('');
+let elemWidth = $state(0);
+let elemHeight = $state(0);
+// import {Items} from '../../lib/data/widgetList.js';
+// import {Websites} from '../../lib/data/websitesList.js'
+
 
 const handleChartClick = (chartType: string) => {
     console.log(chartType);
@@ -29,7 +47,7 @@ const handleChartClick = (chartType: string) => {
             selectedComponent = 'PieChart';
             break;
         case 'DataTable':
-            selectedComponent = 'dataTable';
+            selectedComponent = 'DataTable';
             break;
         default:
             selectedComponent = 'HorizBarChart';
@@ -40,18 +58,32 @@ function loadComponent(component: string) {
 		return import(`../lib/components/cardComponents/${component}.svelte`);
 	}
 
-let theme = $state<Theme[]>([]);
-let dashItems = $state<DashItem[]>([]);
-let blockName = $state('');
-let uniqueName = $state('');
-let dataSource = $state('');
-let dataOptions = $state('');
-let fuelType = $state('');
-let name = $state('');
-let component = $state('');
-let createdBy = $state('system');
-let description = $state('')
-	let propValue = $state('');
+function createUUID(){
+        var dt = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = (dt + Math.random()*16)%16 | 0;
+          dt = Math.floor(dt/16);
+          return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+        });
+        return uuid;
+    }
+
+// $effect(() => {
+//     const elem = document.getElementById('card-div');
+//     if (elem) {
+//         elemWidth = elem.offsetWidth;
+//         elemHeight = elem.offsetHeight;
+//     }
+// })
+
+function updateSize(){
+    const elem = document.getElementById('card-div');
+    if (elem) {
+        elemWidth = elem.offsetWidth;
+        elemHeight = elem.offsetHeight;
+    }
+}
+
 
 	$effect(() => {
 		const savedTheme = localStorage.getItem('theme');
@@ -84,87 +116,80 @@ let description = $state('')
     
 </script>
 
-<h1>JibJab</h1>
+<!-- <h1>JibJab</h1> -->
 <div class="main">
     <div class="left-pane">
         <label for="component-name">Component Name:
             <input type="text" bind:value={blockName}/>
         </label>
         <div class="separator"></div>
-        
+        <p>Available Options:</p>
         <ul>
             <li>
                 <p id="horizBarChart">
-                    <img src={BarChartImage} alt="bar chart" class="rotate-icon"/>
                     <button onclick={() => handleChartClick('HorizBarChart')}  onkeydown={() => handleChartClick('HorizBarChart')}>
+                        <img src={BarChartImage} alt="bar chart" class="rotate-icon"/>
                         Horizontal Bar Chart
                     </button>
                 </p>
             </li>
-            <li class="separator"></li>
-            <li >
+            <li class="separator-light-border"></li>
+            <li >    
                 <p id="verticalBarChart">
-                    <img src={BarChartImage} alt="bar chart" />
                     <button onclick={() => handleChartClick('VertBarChart')} onkeydown={() => handleChartClick('VertBarChart')} >
+                        <img src={BarChartImage} alt="bar chart" />
                         Vertical Bar Chart
                     </button>
                 </p>
             </li>
-            <li class="separator"></li>
+            <li class="separator-light-border"></li>
             <li>
                 <p id="pieChart">
-                    <img src={PieChartImage} alt="pie chart" />
                     <button onclick={() => handleChartClick('PieChart')} onkeydown={() => handleChartClick('PieChart')}>
+                        <img src={PieChartImage} alt="pie chart" />
                         Pie Chart
                     </button>
                 </p>
             </li>
-            <li class="separator"></li>
-            <!-- <li>
-                <p>
-                    <img src={LineChartImage} alt="line chart" />
-                    Line Chart
-                </p>
-            </li>
-            <li class="separator"></li> -->
+            <li class="separator-light-border"></li>
             <li>
                 <p id="dataTable">
-                    <img src={DataTableImage} alt="data table" />
-                    Data Table
-                </p>
+                    <button onclick={() => handleChartClick('DataTable')} onkeydown={() => handleChartClick('DataTable')}>
+                        <img src={DataTableImage} alt="data table" width="83 px"/>
+                        Data Table
+                    </button>
+                </p>    
             </li>
             <li class="separator"></li>
         </ul>
+        <p>Data Sources:</p>
+        <img src={DataSourceIcon} alt="Data Source" />
+        <ul>
+            {#each DataSources as source}
+                <li>
+                    <button on:click={() => dataSource = source.name}>
+                        {source.name} 
+                    </button>
+                </li>
+            {/each}
+        </ul>
         
     </div>
-    <div class="center-pane" >
-        <div class="p-4 w-[300px] h-[300px]" style={cardStyle as string}>
+    <div class="center-pane">
+        <div class="p-4 w-[300px] h-[300px]" style={cardStyle as string} id="card-div" bind:offsetWidth={elemWidth} bind:offsetHeight={elemHeight}>
             {#if blockName === ""}
             <h1 style="font-size: {Number(theme[9]) * 1.25 ?? 0}px; border-bottom: {theme[3]}px solid {theme[4]}; color: {theme[8]};">Component Name</h1>
             {:else}
             <h2 style="font-size: {Number(theme[9]) * 1.25 ?? 0}px; border-bottom: {theme[3]}px solid {theme[4]}; color: {theme[8]};;">{blockName}</h2> 
             {/if}
-            <!-- <p style="font-size: {Number(theme[9])}px;">
-			This is a sample card with data from
-            {#if dataSource == '' || dataSource == undefined}
-                a data source
-            {:else}
-                <span style="padding:2px; font-weight: bold; background-color: {theme[8]};">{dataSource}</span>
-            {/if}
-			about
-			{#if dataOptions == '' || dataOptions == undefined}
-				some data options
-			{:else}
-				<span style="padding:2px; font-weight: bold; background-color: {theme[8]};">{dataOptions}</span>
-			{/if}
-
-            {#if fuelType !== ''}
-				for the <span style="padding:2px; font-weight: bold; background-color: {theme[8]};"> {fuelType} </span>
-			{/if}
-		</p> -->
         <p>
-           Click component name type from the left pane to this area to display your data.
+           Click component type from the left pane to this area to display your data.
         </p>
+        {#if dataSource == ''}
+        <p>Select a Data Source from list below</p>
+        {:else}
+        <p>Data Source: {dataSource}</p>
+        {/if}
         <p id="center-pane-data-area">
             
             {#if selectedComponent === 'HorizBarChart'}
@@ -173,20 +198,12 @@ let description = $state('')
                 <VertBarChart />
             {:else if selectedComponent === 'PieChart'}
                 <PieChart />
-            <!-- {:else if selectedComponent === 'dataTable'}
-                <DataTable /> -->
-            
-            
-
-                <!-- <svelte:component this = {selectedComponent} /> -->
+            {:else if selectedComponent === 'DataTable'}
+                <DataTable />
             {/if}
-            
-            <!-- <HorizBarChart /> -->
-            <!-- <VertBarChart /> -->
-            <!-- <PieChart /> -->
         </p>
         </div>
-
+        
     </div>
     <div class="right-pane">
         <h2>Customize</h2>
@@ -194,7 +211,7 @@ let description = $state('')
             <li>
                 <label for="font-size">Data Font Size:
                 </label><br />
-                    <input type="range" min="10" max="36" bind:value={theme[7]} />
+                    <input type="range" min="10" max="36" bind:value={theme[7]}/>
             </li>
             <li class="separator"></li>
             <li>
@@ -212,12 +229,31 @@ let description = $state('')
             </li>
             <li class="separator"></li>
         </ul>
+        <div class="component-info">
+            <ul>
+                <li>Name: {blockName}</li>
+                <li>Created By: {createdBy}</li>
+                <li>Unique ID: {uniqueName}</li>
+                <li>Data Source: {dataSource}</li>
+                <li>Display Type: {selectedComponent}</li>
+                <li>Background Color: {theme[1]}</li>
+                <li>Text Color: {theme[2]}</li>
+                <li>Font Size: {theme[7]}px</li>
+                <li>Height: {elemHeight}</li>
+                <li>Width: {elemWidth}</li>
+            </ul>
+
+        </div>
     </div>
 </div>
 
 <style>
     .separator {
-        border-bottom: 1px solid white;
+        border-bottom: 2px solid white;
+        margin: 10px 0;
+    }
+    .separator-light-border {
+        border-bottom: 1px solid lightgray;
         margin: 10px 0;
     }
     .main {
@@ -233,15 +269,16 @@ let description = $state('')
         justify-content: center;
         align-items: center;
         border-right: 2px double lightgray;
+        /* overflow-y: scroll; */
     }
     .left-pane img {
         margin-left: auto;
         margin-right: auto;
-        width: 75%;
+        width: 125px;
         padding: 15%;
     }
     .left-pane li {
-        border: 1px solid white;
+        /* border: 1px solid white; */
         margin: 15px;
     }
     .center-pane {
@@ -273,5 +310,18 @@ let description = $state('')
     }
     .rotate-icon {
         transform: rotate(90deg);
+    }
+    input{
+        padding:1%;
+    }
+    .icon{
+        height: 60px !important;
+    }
+    .component-info{
+        padding-left: 2px;
+        position: absolute;
+        bottom: 10px;
+        font-family: monospace;
+        text-align: left;
     }
 </style>

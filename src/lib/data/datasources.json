@@ -1,0 +1,23 @@
+[
+	{
+		"id": "1",
+		"name": "3CX Calls",
+		"description": "3cx Call Data",
+		"url": "../../routes/api/getCallData/callData.json",
+		"icon": "src/lib/images/phoneIcon.svg"
+	},
+	{
+		"id": "2",
+		"name": "3CX Extensions",
+		"description": "3cx Extension Data",
+		"url": "../../routes/api/get3CXExtensionData/extensionData.json",
+		"icon": "src/lib/images/phoneIcon.svg"
+	},
+	{
+		"id": "3",
+		"name": "Fleet Tickets",
+		"description": "Fleet Tickets Data",
+		"url": "../../routes/api/getFleetTicketData/TicketData.json",
+		"icon": "src/lib/images/carIcon.svg"
+	}
+]
