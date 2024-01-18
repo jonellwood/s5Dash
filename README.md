@@ -52,10 +52,10 @@ This is working! Holy smokes!!! We have some momentum now!
 
 I think for now, to solve the API issue, what if there is an API endpoint for each data source AND query, rather than figure out how to make them dynamically - and then allow the user to select from the list ... I think I had this idea already.... idk.
 
-|DataSource
-|\_ViewTypes available for DataSource
-|\_DataPoints available for DataSource\ViewType
-|\_API Endpoint for DataSource\ViewType with DataPoints passed a params
+| DataSource -> ViewTypes -> DataPoints <br/>
+|\_ViewTypes available for DataSource <br/>
+|\_DataPoints available for DataSource\ViewType <br/>
+|\_API Endpoint for DataSource\ViewType with DataPoints passed a params <br/>
 
 Something like that. Held in json file like so:
 
@@ -73,7 +73,7 @@ Something like that. Held in json file like so:
       },
       "VertBarChart": {
         "CustomComponent": ""VertBarChart",
-        "dataPoints": ["Some DataPoint1", "Some DataPoint2"]
+        "dataPoints": ["TotalEmployees", "TotalExtensions", "ExtensionCountByDept"]
       }
     },
   }
