@@ -1,0 +1,93 @@
+[
+	{
+		"id": 1,
+		"name": "3CX Calls",
+		"description": "3cx Call Data",
+		"baseUrl": "../api/getCallData",
+		"viewTypes": {
+			"DataTable": {
+				"CustomComponent": "DataTable",
+				"dataPoints": ["Employee Name", "Call Date", "Call Duration", "Inc Phone Number"],
+				"viewUrl": "/DataTable/callLogs"
+			},
+			"VertBarChart": {
+				"CustomComponent": "VertBarChart",
+				"dataPoints": ["TotalEmployees", "TotalExtensions", "ExtensionCountByDept"],
+				"viewUrl": "/VertBarChart/callCounts"
+			}
+		},
+		"parentRouteUrl": "./3CXCallData"
+	},
+	{
+		"id": 2,
+		"name": "3CX Extensions",
+		"description": "3cx Extension Data",
+		"baseUrl": "../api/get3CXExtensionData",
+		"viewTypes": {
+			"DataTable": {
+				"CustomComponent": "DataTable",
+				"dataPoints": ["Employee Number", "Employee Name", "Employee Extension"],
+				"viewUrl": "/DataTable/employeeExt"
+			},
+			"VertBarChart": {
+				"CustomComponent": "VertBarChart",
+				"dataPoints": ["TotalEmployees", "TotalExtensions", "ExtensionCountByDept"],
+				"viewUrl": "/VertBarChart/extCounts"
+			}
+		},
+		"parentRouteUrl": "./3CXExtensionData"
+	},
+	{
+		"id": 3,
+		"name": "Fleet Tickets",
+		"description": "Fleet Tickets Data",
+		"baseUrl": "../api/getFleetTicketsData",
+		"viewTypes": {
+			"DataTable": {
+				"CustomComponent": "DataTable",
+				"dataPoints": [
+					"OpenTicketCount",
+					"TotalTicketCount",
+					"TicketsBeingOutsourcedCount",
+					"AverageTicketAge",
+					"TicketsWaitingOnDriverCount",
+					"TicketsWaitingOnPartsCount"
+				],
+				"viewUrl": "/DataTable/getFleetTicketData"
+			},
+			"HorizBarChart": {
+				"CustomComponent": "HorizBarChart",
+				"dataPoints": [
+					"TicketsBeingOutsourcedCount",
+					"TicketsWaitingOnDriverCount",
+					"TicketsWaitingOnPartsCount"
+				],
+				"viewUrl": "/HorizBarChart/getEmployeeData"
+			},
+			"VertBarChart": {
+				"CustomComponent": "VertBarChart",
+				"dataPoints": [
+					"TicketsBeingOutsourcedCount",
+					"TicketsWaitingOnDriverCount",
+					"TicketsWaitingOnPartsCount"
+				],
+				"viewUrl": "/VertBarChart/getEmployeeData"
+			}
+		},
+		"parentRouteUrl": "./FleetTickets"
+	},
+	{
+		"id": 4,
+		"name": "Employee Information",
+		"description": "Employee Information Data",
+		"baseUrl": "../api/getEmployeeData",
+		"viewTypes": {
+			"DataTable": {
+				"CustomComponent": "DataTable",
+				"dataPoints": ["Employee Number", "Employee Name", "Employee Email", "Employee Department"],
+				"viewUrl": "/DataTable/getEmployeeData"
+			}
+		},
+		"parentRouteUrl": "./EmployeeInformation"
+	}
+]
