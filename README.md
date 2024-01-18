@@ -61,21 +61,21 @@ Something like that. Held in json file like so:
 
 ```
 [
-{
-"id": 1,
-"name": "3CX Calls",
-"description": "3cx Call Data",
-"url": "../api/getEmployeeData",
-"viewTypes": {
-"DataTable": {
-"CustomComponent": "DataTable",
-"dataPoints": ["Employee Number", "Employee Name", "Employee Extension"]
-},
-"VertBarChart": {
-"CustomComponent": ""VertBarChart",
-"dataPoints": ["Some DataPoint1", "Some DataPoint2"]
-}
-},
-},
+  {
+    "id": 1,
+    "name": "3CX Calls",
+    "description": "3cx Call Data",
+    "url": "../api/getEmployeeData",
+    "viewTypes": {
+      "DataTable": {
+        "CustomComponent": "DataTable",
+        "dataPoints": ["Employee Number", "Employee Name", "Employee Extension"]
+      },
+      "VertBarChart": {
+        "CustomComponent": ""VertBarChart",
+        "dataPoints": ["Some DataPoint1", "Some DataPoint2"]
+      }
+    },
+  }
 ]
 ```
