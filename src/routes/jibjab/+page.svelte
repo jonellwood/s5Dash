@@ -132,6 +132,24 @@
 			<input type="text" bind:value={blockName} />
 		</label>
 		<div class="separator"></div>
+		<p>Data Sources:</p>
+		<img src={DataSourceIcon} alt="Data Source" />
+		<ul>
+			{#each DataSources as source}
+				<li>
+					<button
+						on:click={() => {
+							dataSource = source.name;
+							dataSourceUrl = source.url;
+							selectedFields = [];
+						}}
+					>
+						{source.name}
+					</button>
+				</li>
+			{/each}
+		</ul>
+		<div class="separator"></div>
 		<p>Available Options:</p>
 		<ul>
 			<li>
@@ -182,23 +200,6 @@
 				</p>
 			</li>
 			<li class="separator"></li>
-		</ul>
-		<p>Data Sources:</p>
-		<img src={DataSourceIcon} alt="Data Source" />
-		<ul>
-			{#each DataSources as source}
-				<li>
-					<button
-						on:click={() => {
-							dataSource = source.name;
-							dataSourceUrl = source.url;
-							selectedFields = [];
-						}}
-					>
-						{source.name}
-					</button>
-				</li>
-			{/each}
 		</ul>
 	</div>
 	<div class="center-pane">

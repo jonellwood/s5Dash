@@ -47,3 +47,35 @@ The data table `<th>` values had to be hard coded to make sense.... these values
 - I think the values available for the user to pick from could come from the dataSources.json file 💡💡💡💡
 
 This is working! Holy smokes!!! We have some momentum now!
+
+## IDEA 💡
+
+I think for now, to solve the API issue, what if there is an API endpoint for each data source AND query, rather than figure out how to make them dynamically - and then allow the user to select from the list ... I think I had this idea already.... idk.
+
+|DataSource
+|\_ViewTypes available for DataSource
+|\_DataPoints available for DataSource\ViewType
+|\_API Endpoint for DataSource\ViewType with DataPoints passed a params
+
+Something like that. Held in json file like so:
+
+```
+[
+{
+"id": 1,
+"name": "3CX Calls",
+"description": "3cx Call Data",
+"url": "../api/getEmployeeData",
+"viewTypes": {
+"DataTable": {
+"CustomComponent": "DataTable",
+"dataPoints": ["Employee Number", "Employee Name", "Employee Extension"]
+},
+"VertBarChart": {
+"CustomComponent": ""VertBarChart",
+"dataPoints": ["Some DataPoint1", "Some DataPoint2"]
+}
+},
+},
+]
+```
