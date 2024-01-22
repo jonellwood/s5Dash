@@ -84,4 +84,6 @@ Something like that. Held in json file like so:
 ]
 ```
 
-TODO: Find out why I have 790+ changes all the time!
+TODO: JibJab is writing values to local storage correctly! 🙌 🙌 🙌 🙌
+
+- When users are logged in, direct them to the dashboard page by default always... this will force the dashItems object to be created in local storage.

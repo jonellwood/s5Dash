@@ -39,7 +39,18 @@
 	// let isFieldSelected = $state(false);
 	// import {Items} from '../../lib/data/widgetList.js';
 	// import {Websites} from '../../lib/data/websitesList.js'
-
+	$effect(() => {
+		const savedDashItems = localStorage.getItem("dashItems");
+		if (!savedDashItems) {
+			import("$lib/data/cards.js").then((data) => {
+				let dashItems: DashItem[] = data.Items;
+				localStorage.setItem("dashItems", JSON.stringify(data.Items));
+			});
+		} else {
+			dashItems = JSON.parse(savedDashItems);
+		}
+		// console.log(savedDashItems);
+	});
 	const handleChartClick = (chartType: string) => {
 		console.log(chartType);
 		switch (chartType) {
@@ -156,6 +167,7 @@
 	let showModalTwo = $state(false);
 	let showModalThree = $state(false);
 	let showModalFour = $state(false);
+	let showModalFive = $state(false);
 
 	function createPreflightChecks(e: Event) {
 		const button = document.getElementById("create-button");
@@ -163,22 +175,70 @@
 		e.preventDefault;
 		if (dataSource == "") {
 			showModalOne = true;
-			// alert("You have to select a data Source");
 		} else if (selectedFields.length < 2) {
 			showModalTwo = true;
-			// alert("You have to select at least two fields");
 		} else if (selectedComponent == "") {
-			// alert("You have to select a view type");
 			showModalThree = true;
-		} else {
+		} else if (blockName == "") {
 			showModalFour = true;
-			// alert("Hampsters are just hippy mice");
+		} else {
+			showModalFive = true;
 		}
+	}
+	function updateSavedDashItems(e: MouseEvent) {
+		e.preventDefault();
+		console.log("updatingSavedDashItems");
+		const form = document.getElementById("gen-form") as HTMLFormElement;
+		console.log(form);
+		// console.log(form);
+		if (form) {
+			const formData = new FormData(form);
+			console.log("formData");
+			console.log(formData);
+			// const formObject = {};
+			const formObject: { [key: string]: FormDataEntryValue } = {};
+			console.log(formObject);
+			formData.forEach((value, key) => {
+				formObject[key] = value;
+			});
+
+			const newItemKey = Object.keys(dashItems).length.toString();
+
+			dashItems[newItemKey] = {
+				...formObject,
+				data: {
+					description: description,
+					text: blockName
+				},
+				id: parseInt(newItemKey),
+				x: 0,
+				y: 0,
+				w: 1,
+				h: 1
+			};
+			console.log(dashItems);
+
+			localStorage.setItem("dashItems", JSON.stringify(dashItems));
+			window.location.reload();
+		}
+	}
+
+	function exportDashItemsToJson(): void {
+		const dashItems: any[] = JSON.parse(localStorage.getItem("dashItems")) || [];
+		const jsonString: string = JSON.stringify(dashItems, null, 2);
+		const blob: Blob = new Blob([jsonString], { type: "application/json" });
+		const downloadLink: HTMLAnchorElement = document.createElement("a");
+		downloadLink.href = URL.createObjectURL(blob);
+		downloadLink.download = "myCards.json";
+
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+		document.body.removeChild(downloadLink);
 	}
 </script>
 
 {#if showModalOne}
-	<div class="modal-one" style={cardStyle as string}>
+	<div class="modal" style={cardStyle as string}>
 		<h2>
 			You have to select a data Source to continue
 			<button
@@ -191,7 +251,7 @@
 	</div>
 {/if}
 {#if showModalTwo}
-	<div class="modal-two" style={cardStyle as string}>
+	<div class="modal" style={cardStyle as string}>
 		<h2>
 			You have to select at least two fields to continue
 			<button
@@ -204,7 +264,7 @@
 	</div>
 {/if}
 {#if showModalThree}
-	<div class="modal-three" style={cardStyle as string}>
+	<div class="modal" style={cardStyle as string}>
 		<h2>
 			You have to select a view type to continue
 			<button
@@ -217,13 +277,29 @@
 	</div>
 {/if}
 {#if showModalFour}
-	<div class="modal-four" style={cardStyle as string}>
+	<div class="modal" style={cardStyle as string}>
 		<h2>
-			Hampsters are just hippy mice!! ☮️ 🐭
+			Your component must have a name
 			<button
 				style="color:red;"
 				onclick={() => {
 					showModalFour = false;
+				}}>X</button
+			>
+		</h2>
+	</div>
+{/if}
+
+{#if showModalFive}
+	<div class="modal" style={cardStyle as string}>
+		<h2>
+			Hampsters are just hippy mice!! ☮️ 🐭 <br /> Click the Red X to agree and continue
+			<button
+				style="color:red;"
+				onclick={() => {
+					let e = new MouseEvent("click");
+					showModalFive = false;
+					updateSavedDashItems(e);
 				}}>X</button
 			>
 		</h2>
@@ -278,6 +354,9 @@
 
 		<button class="create-button" id="create-button" onclick={createPreflightChecks}
 			>Create Component</button
+		>
+		<button class="export-button" id="export-button" on:click={exportDashItemsToJson}
+			>Export Components</button
 		>
 	</div>
 	<div class="center-pane">
@@ -386,6 +465,21 @@
 				</li>
 			</ul>
 		</div>
+		<form id="gen-form" method="POST">
+			<input type="hidden" name="blockName" id="blockName" value={blockName} />
+			<input type="hidden" name="propValue" id="propValue" value={blockName} />
+			<input type="hidden" name="createdBy" id="createdBy" value={createdBy} />
+			<input type="hidden" name="component" id="component" value={blockName} />
+			<input type="hidden" name="uniqueName" id="uniqueName" value={uniqueName} />
+			<input type="hidden" name="dataSource" id="dataSource" value={dataSource} />
+			<input type="hidden" name="dataSourceUrl" id="dataSourceUrl" value={dataSourceUrl} />
+			<input type="hidden" name="selectedFields" id="selectedFields" value={selectedFields} />
+			<input type="hidden" name="dataSourceUrl" id="dataSourceUrl" value={dataSourceUrl} />
+			<input type="hidden" name="displayType" id="displayType" value={selectedComponent} />
+			<input type="hidden" name="height" id="height" value={elemHeight} />
+			<input type="hidden" name="width" id="width" value={elemWidth} />
+			<input type="hidden" name="backgroundColor" id="backgroundColor" value={theme[1]} />
+		</form>
 	</div>
 </div>
 
@@ -509,10 +603,26 @@
 		box-shadow: 5px 5px 5px 1px #000b29;
 		transform: scale(0.99);
 	}
-	.modal-one,
-	.modal-two,
-	.modal-three,
-	.modal-four {
+	.export-button {
+		border: 1px solid black;
+		background-color: #fff;
+		padding: 5px;
+		border-radius: 7px;
+		position: absolute;
+		bottom: 50px;
+		left: 0;
+		margin-left: 3%;
+		margin-bottom: 2%;
+		box-shadow: 10px 10px 10px 1px #000b29;
+	}
+	.export-button:disabled {
+		color: lightgray;
+	}
+	.export-button:hover {
+		box-shadow: 5px 5px 5px 1px #000b29;
+		transform: scale(0.99);
+	}
+	.modal {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -533,10 +643,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.modal-one h2,
-	.modal-two h2,
-	.modal-three h2,
-	.modal-four h2 {
+	.modal h2 {
 		font-size: xx-large !important;
 	}
 </style>

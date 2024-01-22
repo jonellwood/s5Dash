@@ -7,7 +7,7 @@
 		"titleBar.inactiveForeground": "#000000cc",
 		"titleBar.activeBackground": "#f09d09",
 		"titleBar.inactiveBackground": "#234b74",
-		"editor.selectionBackground": "#ff0000",
+		"editor.selectionBackground": "#fffeee",
 		"editor.selectionHighlightBackground": "#000000",
 		"editor.wordHighlightBackground": "#ff00ff",
 		"editor.wordHighlightStrongBackground": "#ff0000"
