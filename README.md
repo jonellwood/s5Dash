@@ -87,3 +87,5 @@ Something like that. Held in json file like so:
 TODO: JibJab is writing values to local storage correctly! 🙌 🙌 🙌 🙌
 
 - When users are logged in, direct them to the dashboard page by default always... this will force the dashItems object to be created in local storage.
+
+_(1/22/2024 1545 hours)_ : no getting around it I guess. Tomorrow I am going to have to set up an express server and use the `fs` library to write this data to a file to start mimicking logged in users fetching and storing their component data... 😬🤓
