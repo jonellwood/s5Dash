@@ -10,14 +10,12 @@
 	import DataTable from "$lib/components/sampleCardElements/DataTable.svelte";
 	import Theme from "../+page.svelte";
 	import DataSources from "../../lib/data/datasources.json";
-	console.log(DataSources);
 
 	let cardStyle = $state();
 	let bodyStyle = $state();
 	let theme = $state<Theme[]>([]);
 	let dashItems = $state<DashItem[]>([]);
 	let blockName = $state("");
-	// let uniqueName = $state(updateUniqueName());
 	let uniqueName = $state(createUUID());
 	let dataSource = $state("");
 	let dataSourceUrl = $state("");
@@ -32,7 +30,11 @@
 	let elemWidth = $state(0);
 	let elemHeight = $state(0);
 	let selectedEntry = $derived(DataSources.find((entry) => entry.name === dataSource));
-	let fields = $derived(selectedEntry ? Object.entries(selectedEntry.fields) : []);
+	let fields = $derived(
+		selectedEntry ? Object.entries(selectedEntry.viewTypes.DataTable.dataPoints) : []
+	);
+	let currentViewTypes = $derived(selectedEntry ? Object.entries(selectedEntry.viewTypes) : []);
+
 	let selectedFields = $state([]);
 	// let isFieldSelected = $state(false);
 	// import {Items} from '../../lib/data/widgetList.js';
@@ -75,13 +77,26 @@
 	function handleFieldClick(e: Event) {
 		e.preventDefault();
 		const clickedField = e.currentTarget.value as string;
+		const element = e.currentTarget as HTMLElement;
 		if (clickedField) {
 			const index = selectedFields.indexOf(clickedField);
 
 			if (index === -1) {
 				selectedFields = [...selectedFields, clickedField];
+				element.style.backgroundColor = "white";
+				element.style.color = "black";
+				element.style.border = "1px solid black";
+				element.style.borderRadius = "5px";
+				element.style.padding = "2px";
+				// console.log(selectedFields);
+				element.style.backgroundColor = `{theme[4]}`;
 			} else {
 				selectedFields = selectedFields.filter((field) => field !== clickedField);
+				element.style.backgroundColor = "";
+				element.style.color = "";
+				element.style.border = "";
+				element.style.borderRadius = "";
+				element.style.padding = "";
 			}
 		}
 	}
@@ -122,8 +137,98 @@
 		bodyStyle = `
         background-color: ${theme[6]};`;
 	});
+	function resetDataOptionsFormatting() {
+		const fieldButtons = document.querySelectorAll(
+			".data-options button"
+		) as NodeListOf<HTMLElement>;
+		// console.log("fieldButtons");
+		// console.log(fieldButtons);
+		fieldButtons.forEach((button) => {
+			button.style.backgroundColor = "";
+			button.style.color = "";
+			button.style.border = "";
+			button.style.borderRadius = "";
+			button.style.padding = "";
+		});
+	}
+
+	let showModalOne = $state(false);
+	let showModalTwo = $state(false);
+	let showModalThree = $state(false);
+	let showModalFour = $state(false);
+
+	function createPreflightChecks(e: Event) {
+		const button = document.getElementById("create-button");
+		console.log(button);
+		e.preventDefault;
+		if (dataSource == "") {
+			showModalOne = true;
+			// alert("You have to select a data Source");
+		} else if (selectedFields.length < 2) {
+			showModalTwo = true;
+			// alert("You have to select at least two fields");
+		} else if (selectedComponent == "") {
+			// alert("You have to select a view type");
+			showModalThree = true;
+		} else {
+			showModalFour = true;
+			// alert("Hampsters are just hippy mice");
+		}
+	}
 </script>
 
+{#if showModalOne}
+	<div class="modal-one">
+		<h2>
+			You have to select a data Source to continue
+			<button
+				style="color:red;"
+				onclick={() => {
+					showModalOne = false;
+				}}>X</button
+			>
+		</h2>
+	</div>
+{/if}
+{#if showModalTwo}
+	<div class="modal-two">
+		<h2>
+			You have to select at least two fields to continue
+			<button
+				style="color:red;"
+				onclick={() => {
+					showModalTwo = false;
+				}}>X</button
+			>
+		</h2>
+	</div>
+{/if}
+{#if showModalThree}
+	<div class="modal-three">
+		<h2>
+			You have to select a view type to continue
+			<button
+				style="color:red;"
+				onclick={() => {
+					showModalThree = false;
+				}}>X</button
+			>
+		</h2>
+	</div>
+{/if}
+{#if showModalFour}
+	<div class="modal-four">
+		<h2>
+			Hampsters are just hippy mice!! ☮️ 🐭
+			<button
+				style="color:red;"
+				onclick={() => {
+					showModalFour = false;
+				}}>X</button
+			>
+		</h2>
+	</div>
+{/if}
 <!-- <h1>JibJab</h1> -->
 <div class="main">
 	<div class="left-pane">
@@ -140,8 +245,10 @@
 					<button
 						on:click={() => {
 							dataSource = source.name;
-							dataSourceUrl = source.url;
+							dataSourceUrl = source.baseUrl;
 							selectedFields = [];
+							resetDataOptionsFormatting();
+							selectedComponent = "";
 						}}
 					>
 						{source.name}
@@ -150,61 +257,31 @@
 			{/each}
 		</ul>
 		<div class="separator"></div>
-		<p>Available Options:</p>
-		<ul>
-			<li>
-				<p id="horizBarChart">
+		{#if dataSource === ""}
+			<p>Select Data Source to see options:</p>
+		{:else}
+			{#each currentViewTypes as [viewTypeName, viewType]}
+				<li>
 					<button
-						onclick={() => handleChartClick("HorizBarChart")}
-						onkeydown={() => handleChartClick("HorizBarChart")}
+						on:click={() => {
+							handleChartClick(viewTypeName);
+							if (selectedEntry) {
+								dataSourceUrl = selectedEntry.baseUrl + viewType.viewUrl;
+							}
+						}}
 					>
-						<img src={BarChartImage} alt="bar chart" class="rotate-icon" />
-						Horizontal Bar Chart
+						{viewTypeName}
 					</button>
-				</p>
-			</li>
-			<li class="separator-light-border"></li>
-			<li>
-				<p id="verticalBarChart">
-					<button
-						onclick={() => handleChartClick("VertBarChart")}
-						onkeydown={() => handleChartClick("VertBarChart")}
-					>
-						<img src={BarChartImage} alt="bar chart" />
-						Vertical Bar Chart
-					</button>
-				</p>
-			</li>
-			<li class="separator-light-border"></li>
-			<li>
-				<p id="pieChart">
-					<button
-						onclick={() => handleChartClick("PieChart")}
-						onkeydown={() => handleChartClick("PieChart")}
-					>
-						<img src={PieChartImage} alt="pie chart" />
-						Pie Chart
-					</button>
-				</p>
-			</li>
-			<li class="separator-light-border"></li>
-			<li>
-				<p id="dataTable">
-					<button
-						onclick={() => handleChartClick("DataTable")}
-						onkeydown={() => handleChartClick("DataTable")}
-					>
-						<img src={DataTableImage} alt="data table" width="83 px" />
-						Data Table
-					</button>
-				</p>
-			</li>
-			<li class="separator"></li>
-		</ul>
+				</li>
+			{/each}
+		{/if}
+
+		<button class="create-button" id="create-button" onclick={createPreflightChecks}
+			>Create Component</button
+		>
 	</div>
 	<div class="center-pane">
 		<div
-			class="h-[300px] w-[300px] p-4"
 			style={cardStyle as string}
 			id="card-div"
 			bind:offsetWidth={elemWidth}
@@ -226,11 +303,7 @@
 				</h2>
 			{/if}
 			<p>Click component type from the left pane to this area to display your data.</p>
-			<!-- {#if dataSource == ""}
-				<p>Select a Data Source from list below</p>
-			{:else}
-				<p>Data Source: {dataSource}</p>
-			{/if} -->
+
 			<p id="center-pane-data-area">
 				{#if selectedComponent === "HorizBarChart"}
 					<HorizBarChart />
@@ -245,7 +318,7 @@
 
 			<div class="data-options">
 				{#if dataSource == ""}
-					<p>Select a Data Source from list below</p>
+					<p>⬅️ Select a Data Source from list on the left</p>
 				{:else}
 					<p>Data Source: {dataSource}</p>
 					{#if selectedEntry}
@@ -254,7 +327,11 @@
 							<li class="separator-light-border"></li>
 							{#each fields as [fieldName, fieldLabel]}
 								<li>
-									<button onclick={handleFieldClick} onkeydown={handleFieldClick} value={fieldName}>
+									<button
+										onclick={handleFieldClick}
+										onkeydown={handleFieldClick}
+										value={fieldLabel}
+									>
 										{fieldLabel}
 									</button>
 								</li>
@@ -299,7 +376,14 @@
 				<li>Height: {elemHeight}</li>
 				<li>Width: {elemWidth}</li>
 				<li>Data Source URL: {dataSourceUrl}</li>
-				<li>Selected Fields: {selectedFields}</li>
+				<li>
+					Selected Fields:
+					<ul>
+						{#each selectedFields as field}
+							<li>{field}</li>
+						{/each}
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -318,7 +402,7 @@
 		width: 97dvw;
 		height: 97dvh;
 		display: grid;
-		grid-template-columns: 15% 65% 20%;
+		grid-template-columns: 15% 55% 30%;
 	}
 	.left-pane {
 		padding: 5px;
@@ -351,7 +435,7 @@
 		min-width: 300px;
 		max-width: 650px;
 		min-height: 300px;
-		max-height: 550px;
+		/* max-height: 550px; */
 		position: relative;
 		/* left: 10%; */
 		top: 20%;
@@ -374,14 +458,79 @@
 		height: 60px !important;
 	}
 	.component-info {
+		display: flex;
+		flex-wrap: wrap;
 		padding-left: 2px;
 		position: absolute;
 		bottom: 10px;
 		font-family: monospace;
 		text-align: left;
+		max-width: 300px;
+		/* text-wrap: wrap; */
 	}
 	.data-options {
 		margin-top: 5%;
 		font-family: monospace;
+		/* display: flex; */
+	}
+	.data-options ul {
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+	}
+	/* .blue {
+		color: hotpink !important;
+		background-color: blueviolet !important;
+	} */
+	button {
+		padding: 2px;
+		border: 1px solid transparent;
+	}
+	#card-div {
+		padding: 1em;
+		height: fit-content;
+	}
+	.create-button {
+		border: 1px solid black;
+		background-color: #fff;
+		padding: 5px;
+		border-radius: 7px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		margin-left: 3%;
+		margin-bottom: 2%;
+		box-shadow: 10px 10px 10px 1px #000b29;
+	}
+	.create-button:disabled {
+		color: lightgray;
+	}
+	.create-button:hover {
+		box-shadow: 5px 5px 5px 1px #000b29;
+		transform: scale(0.99);
+	}
+	.modal-one,
+	.modal-two,
+	.modal-three,
+	.modal-four {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin-top: 15%;
+		margin-right: 25%;
+		margin-bottom: 15%;
+		margin-left: 25%;
+		background-color: limegreen;
+		z-index: 5;
+		text-align: center;
+		font-size: xx-large;
+		border: 4px solid darkgreen;
+		border-radius: 7px;
+		box-shadow: 5px 5px 5px 1px #000b29;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>

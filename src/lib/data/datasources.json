@@ -6,11 +6,13 @@
 		"baseUrl": "../api/getCallData",
 		"viewTypes": {
 			"DataTable": {
+				"type": "DataTable",
 				"CustomComponent": "DataTable",
 				"dataPoints": ["Employee Name", "Call Date", "Call Duration", "Inc Phone Number"],
 				"viewUrl": "/DataTable/callLogs"
 			},
 			"VertBarChart": {
+				"type": "VertBarChart",
 				"CustomComponent": "VertBarChart",
 				"dataPoints": ["TotalEmployees", "TotalExtensions", "ExtensionCountByDept"],
 				"viewUrl": "/VertBarChart/callCounts"
