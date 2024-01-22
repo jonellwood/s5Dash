@@ -178,7 +178,7 @@
 </script>
 
 {#if showModalOne}
-	<div class="modal-one">
+	<div class="modal-one" style={cardStyle as string}>
 		<h2>
 			You have to select a data Source to continue
 			<button
@@ -191,7 +191,7 @@
 	</div>
 {/if}
 {#if showModalTwo}
-	<div class="modal-two">
+	<div class="modal-two" style={cardStyle as string}>
 		<h2>
 			You have to select at least two fields to continue
 			<button
@@ -204,7 +204,7 @@
 	</div>
 {/if}
 {#if showModalThree}
-	<div class="modal-three">
+	<div class="modal-three" style={cardStyle as string}>
 		<h2>
 			You have to select a view type to continue
 			<button
@@ -217,7 +217,7 @@
 	</div>
 {/if}
 {#if showModalFour}
-	<div class="modal-four">
+	<div class="modal-four" style={cardStyle as string}>
 		<h2>
 			Hampsters are just hippy mice!! ☮️ 🐭
 			<button
@@ -532,5 +532,11 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.modal-one h2,
+	.modal-two h2,
+	.modal-three h2,
+	.modal-four h2 {
+		font-size: xx-large !important;
 	}
 </style>
