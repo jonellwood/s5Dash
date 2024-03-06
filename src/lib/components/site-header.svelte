@@ -25,6 +25,7 @@
 		</div>
 		<div class="flex flex-1 items-center justify-center space-x-2 pr-4 sm:space-x-4">
 			<nav class="flex items-center">
+				<a href="/charts">Charts</a>
 				<a href="/libDev">libDev</a>
 				<a href="/jibjab">JibJab</a>
 				<a href="/dnd">D&D</a>
